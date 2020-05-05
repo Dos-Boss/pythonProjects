@@ -11,7 +11,7 @@ def get_clock_speed():
     return (clock_speed)
 
 while True:
-    print(get_clock_speed()+"Mhz")
+    print(get_clock_speed()+"MHz")
     print(measure_temp())
 
     time.sleep(1)
