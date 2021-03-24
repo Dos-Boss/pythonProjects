@@ -1,4 +1,4 @@
-# Interactive dictionary using SQL database
+# Interactive dictionary using SQL database (mysql-connector)
 # Brendan McCann
 # 20/05/20 
 
