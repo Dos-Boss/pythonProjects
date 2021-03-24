@@ -1,3 +1,7 @@
+# Interactive dictionary using SQL database
+# Brendan McCann
+# 20/05/20 
+
 import mysql.connector
 from difflib import get_close_matches
 
