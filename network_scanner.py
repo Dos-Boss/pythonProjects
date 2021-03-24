@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-# Brendan McCann
-# 24/03/2021
-# Simple Network Scanner, displaying connected IPs, MACs, and Hostnames
+# - Brendan McCann
+# - 24/03/2021
+# - Simple Network Scanner, displaying connected IPs, MACs, and Hostnames
 
 import scapy.all as scapy
 import optparse
