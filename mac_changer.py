@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-# MAC address changer
-# Brendan McCann
-# 21/03/2021
+# - Brendan McCann
+# - 21/03/2021
+# - MAC address changer
 
 import subprocess
 import optparse
