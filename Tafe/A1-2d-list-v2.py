@@ -92,11 +92,11 @@ def validateBSDay(day):
         if int(day) > 0 and int(day) < 32:
             return day
         else:
-            return validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
+            return validateBSDay(input("Please enter a day to search (1-31) or (A)ll: ").upper())
     elif day == "A" or day == "ALL":
         return day
     else:
-        return validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
+        return validateBSDay(input("Please enter a day to search (1-31) or (A)ll: ").upper())
 
 # Main loop to interpret user's command.
 def getCommand():
