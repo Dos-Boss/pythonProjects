@@ -1,5 +1,5 @@
 # Brendan McCann - J145887
-# Python Assessment 1 - V2.0
+# Python Assessment 1 - 2D-List v2.0
 # 31/03/2021
 
 import random
