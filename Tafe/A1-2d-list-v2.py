@@ -80,10 +80,10 @@ def binarySearch(lst, day, temp):
 # Validates user input for Binary Search temp.
 def validateBSTemp(temp):
     try:
-        temp = round(float(temp), 2)
+        temp = round(float(temp), 1)
     except ValueError:
         temp = validateBSTemp(input("Please enter temperature to search for: "))
-    return round(float(temp), 2)
+    return round(float(temp), 1)
       
 def validateBSDay(day):
 
@@ -119,17 +119,17 @@ def getCommand():
             elif uInput == "1":
                 avgNoonTemp(lstTemps)
             elif uInput == "2":
-                printLowHigh(lstTemps)
+                printLowHigh(getSortedList(lstTemps))
             elif uInput == "3":
                 tempToSearch = validateBSTemp(input("\nPlease enter temperature to search for: "))
                 dayToSearch = validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
 
                 if dayToSearch.isnumeric():
                     dayToSearch = int(dayToSearch)
-                    binarySearch(lstTemps[dayToSearch - 1], dayToSearch, tempToSearch)
+                    binarySearch(getSortedTemp(lstTemps)[dayToSearch - 1], dayToSearch, tempToSearch)
                 else:
                     for day in range(days):
-                        binarySearch(lstTemps[day], day + 1, tempToSearch)
+                        binarySearch(getSortedTemp(lstTemps)[day], day + 1, tempToSearch)
 
 
 # Displays menu and calls program loop.
