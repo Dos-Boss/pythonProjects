@@ -35,7 +35,7 @@ def avgNoonTemp(lst):
     for day in range(len(lst)):
         tempSum += lst[day][11]
     avgTemp = tempSum / days
-    print("\nThe average afternoon temperature is: {:.2f} degrees".format(avgTemp))
+    print("\nThe average afternoon temperature is: {:.1f} degrees".format(avgTemp))
 
 
 # Generate and print lists of daily lows/highs
@@ -71,7 +71,7 @@ def binarySearch(lst, day, temp):
             end = mid - 1
         else:
             print(f"\nDay {day}:")
-            print("Temperature of {0} degrees occured on hour {1}.".format(temp, mid + 1))
+            print("Temperature of {0} degrees found!, first occured on hour {1}.".format(temp, mid + 1))
             return
     print(f"\nDay {day}:")
     print("Temperature of {0} degrees did not occur.".format(temp))
@@ -84,20 +84,20 @@ def validateBSTemp(temp):
     except ValueError:
         temp = validateBSTemp(input("Please enter temperature to search for: "))
     return round(float(temp), 1)
-      
+
+# Validates user input for Binary Search temp.
 def validateBSDay(day):
 
     if day.isnumeric():
         if int(day) > 0 and int(day) < 32:
             return day
         else:
-            validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
+            return validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
     elif day == "A" or day == "ALL":
         return day
     else:
-        validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
+        return validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
 
-  
 # Main loop to interpret user's command.
 def getCommand():
     
@@ -125,12 +125,10 @@ def getCommand():
                 dayToSearch = validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
 
                 if dayToSearch.isnumeric():
-                    dayToSearch = int(dayToSearch)
-                    binarySearch(getSortedTemp(lstTemps)[dayToSearch - 1], dayToSearch, tempToSearch)
+                    binarySearch(getSortedList(lstTemps)[int(dayToSearch) - 1], dayToSearch, tempToSearch)
                 else:
                     for day in range(days):
-                        binarySearch(getSortedTemp(lstTemps)[day], day + 1, tempToSearch)
-
+                        binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch)
 
 # Displays menu and calls program loop.
 def main():
