@@ -134,7 +134,7 @@ def getCommand():
 def main():
     print("***************************************************")
     print("        Python Assessment 1 - 2D List v2.0")
-    print("            Brendan McCann - J145887")
+    print("              Brendan McCann - J145887")
     print("***************************************************")
     print("[0] - Regenerate list of temps")
     print("[1] - Show average afternoon temp")
