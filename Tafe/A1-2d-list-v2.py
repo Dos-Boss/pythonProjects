@@ -1,5 +1,5 @@
 # Brendan McCann - J145887
-# Python Assessment 1 - 2D-List v2.0
+# Python Assessment 1 - V2.0
 # 31/03/2021
 
 import random
@@ -38,7 +38,7 @@ def avgNoonTemp(lst):
     print("\nThe average afternoon temperature is: {:.1f} degrees".format(avgTemp))
 
 
-# Generate and print lists of daily lows/highs
+# Generate and print lists of daily lows/highs from sorted list
 def printLowHigh(lst):
     lstLows = []
     lstHighs = []
@@ -51,7 +51,7 @@ def printLowHigh(lst):
     print("\nHighs: " + ", ".join(map(str, lstHighs)))
 
 
-# This algorithm relies on a sorted array.
+# This algorithm relies on a sorted list.
 # It sets the search boundary with start, mid and end.
 # The mid value is then compared with the temp we are searching for.
 # Depending on the above result, the boundary is then cut in half,
@@ -71,7 +71,7 @@ def binarySearch(lst, day, temp):
             end = mid - 1
         else:
             print(f"\nDay {day}:")
-            print("Temperature of {0} degrees found!, first occured on hour {1}.".format(temp, mid + 1))
+            print("Temperature of {0} degrees found!, occured on hour {1}.".format(temp, mid + 1))
             return
     print(f"\nDay {day}:")
     print("Temperature of {0} degrees did not occur.".format(temp))
@@ -85,7 +85,7 @@ def validateBSTemp(temp):
         temp = validateBSTemp(input("Please enter temperature to search for: "))
     return round(float(temp), 1)
 
-# Validates user input for Binary Search temp.
+# Validates user input for Binary Search day.
 def validateBSDay(day):
 
     if day.isnumeric():
@@ -142,7 +142,7 @@ def main():
     print("[3] - Search for specific temp")
     print("[H] - Help - Show this menu")
     print("[Q] - Quit")
-
+    
     getCommand()
 
 genList()
