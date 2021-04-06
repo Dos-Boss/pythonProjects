@@ -4,7 +4,6 @@
 # 05/04/2021
 
 import addressbook as ab
-import pickle
 
 
 def addRecord():
