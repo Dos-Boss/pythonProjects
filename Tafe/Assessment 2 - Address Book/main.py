@@ -21,7 +21,7 @@ def addRecord():
 
         
 def getCommand():
-    validCommands = ["0", "1", "2", "3", "4", "5","6", "H", "HELP", "Q", "QUIT"]
+    validCommands = ["0", "1", "2", "3", "4", "5", "6", "H", "HELP", "Q", "QUIT"]
     
     while True:
         uInput = input("\nPlease specify command: ").upper()
