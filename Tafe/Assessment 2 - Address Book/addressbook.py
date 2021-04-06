@@ -201,7 +201,7 @@ def buildIndex():
                 break
 
 
-# Creates an array of Records from the index and parses it for pickling.
+# Creates an array of Records from the index dictionary and parses it for pickling.
 def pickleFromIndex():
     toAdd = []
     with open(fileName, 'wb') as file:
