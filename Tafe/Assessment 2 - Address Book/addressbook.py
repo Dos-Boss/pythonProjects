@@ -121,18 +121,26 @@ def delRecord(name, givenIndex=None):
 
 # Wipes index and pickled file
 def selfDestruct():
-    confirm = input("This will erase ALL data, are you sure? y/n: ")
-    global index
-    index.clear()
-    index = {"Index": [],
-             "Register": [],
-             "Name": [],
-             "Email": [],
-             "Phone": [],
-             "Address": []}
-    pickleFromIndex()
-    buildIndex()
-    print("\nAll data successfully wiped")
+    valid = ["y", "n"]
+    confirm = ""
+
+    while confirm not in valid:
+        confirm = input("This will erase ALL data, are you sure? y/n: ").lower()
+
+    if confirm == 'y':
+        global index
+        index.clear()
+        index = {"Index": [],
+                "Register": [],
+                "Name": [],
+                "Email": [],
+                "Phone": [],
+                "Address": []}
+        pickleFromIndex()
+        buildIndex()
+        print("\nAll data successfully wiped")
+    else:
+        return
          
 def getRecord(name):
     lowerList = getLowerList()
