@@ -150,7 +150,6 @@ def recordCount():
 def readFile(path):
     global lstIndex
     lstIndex = []
-    lstIndex.clear()
 
     with open(path, 'rb') as file:
         try:
