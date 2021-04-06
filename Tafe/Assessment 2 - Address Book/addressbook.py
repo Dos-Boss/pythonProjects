@@ -5,7 +5,9 @@
 
 import pickle
 
+
 fileName = "addrbook.bin"
+
 
 class Record:
     def __init__(self, name, email, phone, addr):
@@ -74,41 +76,40 @@ def delRecord(name, givenIndex=None):
     else:
         x = givenIndex
 
-    if name.lower() in lowerList:
-        if lowerList.count(name) == 1 or givenIndex is not None:
-            del index["Index"][x]
-            del index["Register"][x]
-            del index["Name"][x]
-            del index["Email"][x]
-            del index["Phone"][x]
-            del index["Address"][x]
-            # Rebuild pickled file from adjusted index dictionary.
-            pickleFromIndex()
-            print("\nRecord deleted successfully")
+    if lowerList.count(name) == 1 or givenIndex is not None:
+        del index["Index"][x]
+        del index["Register"][x]
+        del index["Name"][x]
+        del index["Email"][x]
+        del index["Phone"][x]
+        del index["Address"][x]
+        # Rebuild pickled file from adjusted index dictionary.
+        pickleFromIndex()
+        print("\nRecord deleted successfully")
 
-        elif lowerList.count(name) > 1 and givenIndex is None:
-            occLocations = [i for i, x in enumerate(lowerList) if x == name]
-            print(f"\n*** {len(occLocations)} occurances of {name.capitalize()} found! ***\n")
-            with open(fileName, 'rb') as file:
-                for x in range(len(occLocations)):
-                    file.seek(index["Register"][occLocations[x]])
-                    y = pickle.load(file)
-                    print(f"Record found at index {occLocations[x]}.")
-                    y.printInfo()
-                    print("")
+    elif lowerList.count(name) > 1 and givenIndex is None:
+        occLocations = [i for i, x in enumerate(lowerList) if x == name]
+        print(f"\n*** {len(occLocations)} occurances of {name.capitalize()} found! ***\n")
+        with open(fileName, 'rb') as file:
+            for x in range(len(occLocations)):
+                file.seek(index["Register"][occLocations[x]])
+                y = pickle.load(file)
+                print(f"Record found at index {occLocations[x]}.")
+                y.printInfo()
+                print("")
 
-            while True:
-                uInput = input("\n'c' to Cancel\nPlease enter index number of record you wish to delete: ")
-                if uInput == "c":
+        while True:
+            uInput = input("\n'c' to Cancel\nPlease enter index number of record you wish to delete: ")
+            if uInput == "c":
+                return
+            try:
+                if int(uInput) in occLocations:
+                    delRecord(name, int(uInput))
                     return
-                try:
-                    if int(uInput) in occLocations:
-                        delRecord(name, int(uInput))
-                        return
-                    else:
-                        pass
-                except ValueError:
+                else:
                     pass
+            except ValueError:
+                pass
           
             
 def getRecord(name):
@@ -135,8 +136,8 @@ def getRecord(name):
                     print("")
     else:
         print("\nNo record found.")
-   
-    
+
+
 # Prints a number equal to the amount of items in pickle file
 def recordCount():
     count = 0
