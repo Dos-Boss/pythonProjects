@@ -56,7 +56,7 @@ def main():
     print("[2] - Print all records")
     print("[3] - Add a record")
     print("[4] - Delete a record")
-    print("[5] - Lookup name")
+    print("[5] - Lookup record")
     print("[H] - Help - Show this menu")
     print("[Q] - Quit")
     
