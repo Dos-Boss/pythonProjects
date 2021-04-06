@@ -83,9 +83,6 @@ def delRecord(name, givenIndex=None):
         del index["Email"][x]
         del index["Phone"][x]
         del index["Address"][x]
-        # Rebuild pickled file from adjusted index dictionary.
-        pickleFromIndex()
-        print("\nRecord deleted successfully")
 
     elif lowerList.count(name) > 1 and givenIndex is None:
         occLocations = [i for i, x in enumerate(lowerList) if x == name]
@@ -97,8 +94,20 @@ def delRecord(name, givenIndex=None):
                 print(f"Index {occLocations[x]} | " + y.getInfo() + "\n")
 
         while True:
-            uInput = input("\n'c' to Cancel\nPlease enter index number of record you wish to delete: ")
-            if uInput == "c":
+            uInput = input("\n(C)ancel, (A)ll\nPlease enter index number of record you wish to delete: ")
+            if uInput.lower() == "c" or uInput.lower() == "cancel":
+                return
+
+            if uInput.lower() == "a" or uInput == "all":
+                registersToDel = []
+                indexToDel = 0
+
+                for x in range(len(occLocations)):
+                    registersToDel.append(index["Register"][occLocations[x]])
+
+                for x in registersToDel:
+                    indexToDel = index["Register"].index(x)
+                    delRecord(index["Name"][indexToDel], indexToDel)
                 return
             try:
                 if int(uInput) in occLocations:
@@ -108,8 +117,23 @@ def delRecord(name, givenIndex=None):
                     pass
             except ValueError:
                 pass
-          
-            
+        
+
+# Wipes index and pickled file
+def selfDestruct():
+    confirm = input("This will erase ALL data, are you sure? y/n: ")
+    global index
+    index.clear()
+    index = {"Index": [],
+             "Register": [],
+             "Name": [],
+             "Email": [],
+             "Phone": [],
+             "Address": []}
+    pickleFromIndex()
+    buildIndex()
+    print("\nAll data successfully wiped")
+         
 def getRecord(name):
     lowerList = getLowerList()
 
