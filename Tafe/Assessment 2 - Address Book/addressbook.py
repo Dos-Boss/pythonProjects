@@ -16,11 +16,11 @@ class Record:
         self.phone = phone
         self.addr = addr
 
-    def printInfo(self):
-        print("Name: " + self.name + " | " +
-              "Email: " + self.email + " | " +
-              "Phone: " + self.phone + " | " +
-              "Address: " + self.addr)
+    def getInfo(self):
+        return("Name: " + self.name + " | " +
+               "Email: " + self.email + " | " +
+               "Phone: " + self.phone + " | " +
+               "Address: " + self.addr)
 
 
 # Startup command to check if the .bin file exists, if not, an empty dummy file is created.
@@ -94,9 +94,7 @@ def delRecord(name, givenIndex=None):
             for x in range(len(occLocations)):
                 file.seek(index["Register"][occLocations[x]])
                 y = pickle.load(file)
-                print(f"Record found at index {occLocations[x]}.")
-                y.printInfo()
-                print("")
+                print(f"Index {occLocations[x]} | " + y.getInfo() + "\n")
 
         while True:
             uInput = input("\n'c' to Cancel\nPlease enter index number of record you wish to delete: ")
@@ -122,7 +120,7 @@ def getRecord(name):
                 file.seek(index["Register"][x])
                 y = pickle.load(file)
                 print(f"\nRecord found at index {x}.")
-                y.printInfo()
+                print(y.getInfo())
             return
         else:
             occLocations = [i for i, x in enumerate(lowerList) if x == name]
@@ -131,9 +129,7 @@ def getRecord(name):
                 for x in range(len(occLocations)):
                     file.seek(index["Register"][occLocations[x]])
                     y = pickle.load(file)
-                    print(f"Record found at index {occLocations[x]}.")
-                    y.printInfo()
-                    print("")
+                    print(f"Index: {occLocations[x]} | " + y.getInfo() + "\n")
     else:
         print("\nNo record found.")
 
@@ -169,7 +165,7 @@ def printAllRecords():
             try:
                 file.seek(lstIndex[x])
                 y = pickle.load(file)
-                y.printInfo()
+                print(f"Index: {x} | " + y.getInfo())
             except EOFError:
                 break
 
