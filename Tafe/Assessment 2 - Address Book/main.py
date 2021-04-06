@@ -21,7 +21,7 @@ def addRecord():
 
         
 def getCommand():
-    validCommands = ["0", "1", "2", "3", "4", "5", "H", "HELP", "Q", "QUIT"]
+    validCommands = ["0", "1", "2", "3", "4", "5","6", "H", "HELP", "Q", "QUIT"]
     
     while True:
         uInput = input("\nPlease specify command: ").upper()
@@ -43,8 +43,12 @@ def getCommand():
                 addRecord()
             elif uInput == "4":
                 ab.delRecord(input("\nPlease enter name to remove: "))
+                print("\nRecord(s) deleted successfully")
+                ab.pickleFromIndex()
             elif uInput == "5":
                 ab.getRecord(input("\nPlease enter name to lookup: "))
+            elif uInput == '6':
+                ab.selfDestruct()
             else:
                 return
 
@@ -59,6 +63,7 @@ def main():
     print("[3] - Add a record")
     print("[4] - Delete a record")
     print("[5] - Lookup record")
+    print("[6] - Clear all records")
     print("[H] - Help - Show this menu")
     print("[Q] - Quit")
     
