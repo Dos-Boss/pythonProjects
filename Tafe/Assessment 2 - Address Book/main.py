@@ -42,8 +42,12 @@ def getCommand():
             elif uInput == "3":
                 addRecord()
             elif uInput == "4":
-                ab.delRecord(input("\nPlease enter name to remove: "))
-                print("\nRecord(s) deleted successfully")
+                uInput = input("\nPlease enter name to remove: ")
+                result = ab.delRecord(uInput)
+                if result == 1 or result == 3:
+                    print("\nRecord deleted successfully!")
+                elif result == 2:
+                    print("\nRecords deleted successfully!")
                 ab.pickleFromIndex()
             elif uInput == "5":
                 ab.getRecord(input("\nPlease enter name to lookup: "))
@@ -68,6 +72,7 @@ def main():
     print("[Q] - Quit")
     
     getCommand()
+
 
 ab.checkExists()
 ab.buildIndex()
