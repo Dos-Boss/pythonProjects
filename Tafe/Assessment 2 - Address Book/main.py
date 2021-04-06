@@ -4,6 +4,7 @@
 # 05/04/2021
 
 import addressbook as ab
+import os
 
 
 def addRecord():
@@ -31,6 +32,7 @@ def getCommand():
             if uInput == "Q" or uInput == "QUIT":
                 quit()
             elif uInput == "H" or uInput == "HELP":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 main()
             elif uInput == "1":
                 print("\nCurrent record count: " + str(ab.recordCount()))
