@@ -84,6 +84,8 @@ def delRecord(name, givenIndex=None):
         del index["Phone"][x]
         del index["Address"][x]
 
+        return 3
+
     elif lowerList.count(name) > 1 and givenIndex is None:
         occLocations = [i for i, x in enumerate(lowerList) if x == name]
         print(f"\n*** {len(occLocations)} occurances of {name.capitalize()} found! ***\n")
@@ -97,8 +99,7 @@ def delRecord(name, givenIndex=None):
             uInput = input("\n(C)ancel, (A)ll\nPlease enter index number of record you wish to delete: ")
             if uInput.lower() == "c" or uInput.lower() == "cancel":
                 return
-
-            if uInput.lower() == "a" or uInput == "all":
+            elif uInput.lower() == "a" or uInput == "all":
                 registersToDel = []
                 indexToDel = 0
 
@@ -108,15 +109,16 @@ def delRecord(name, givenIndex=None):
                 for x in registersToDel:
                     indexToDel = index["Register"].index(x)
                     delRecord(index["Name"][indexToDel], indexToDel)
-                return
-            try:
-                if int(uInput) in occLocations:
-                    delRecord(name, int(uInput))
-                    return
-                else:
+                return 2
+            else:
+                try:
+                    if int(uInput) in occLocations:
+                        delRecord(name, int(uInput))
+                        return 1
+                    else:
+                        pass
+                except ValueError:
                     pass
-            except ValueError:
-                pass
         
 
 # Wipes index and pickled file
