@@ -6,27 +6,14 @@
 import addressbook as ab
 import os
 
-
-def addRecord():
-    print("\nAdding record:")
-    name = input("Please enter name: ").capitalize()
-    email = input("Please enter email address: ")
-    phone = input("Please enter phone number: ")
-    addr = input("Please enter home address: ")
-
-    newRec = ab.Record(name, email, phone, addr)
-    ab.addRecord(newRec)
-
-    print("\nRecord succefully added!")
-
         
 def getCommand():
-    validCommands = ["0", "1", "2", "3", "4", "5", "6", "H", "HELP", "Q", "QUIT"]
+    validCommands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "H", "HELP", "Q", "QUIT"]
     
     while True:
         uInput = input("\nPlease specify command: ").upper()
         if uInput not in validCommands:
-            print("Invalid Command, enter H for help")
+            print("Invalid command, enter H for help")
             getCommand()
         else:
             if uInput == "Q" or uInput == "QUIT":
@@ -40,19 +27,23 @@ def getCommand():
                 print("\nRecord List:")
                 ab.printAllRecords()
             elif uInput == "3":
-                addRecord()
+                ab.createRecord()
             elif uInput == "4":
                 uInput = input("\nPlease enter name to remove: ")
                 result = ab.delRecord(uInput)
-                if result == 1 or result == 3:
-                    print("\nRecord deleted successfully!")
+                if result == 1:
+                    print("\n*** Record deleted successfully! ***")
                 elif result == 2:
-                    print("\nRecords deleted successfully!")
+                    print("\n*** Records deleted successfully! ***")
                 ab.pickleFromIndex()
             elif uInput == "5":
                 ab.getRecord(input("\nPlease enter name to lookup: "))
-            elif uInput == '6':
+            elif uInput == "6":
                 ab.selfDestruct()
+            elif uInput == "7":
+                ab.saveBackup()
+            elif uInput == "8":
+                ab.loadBackup()
             else:
                 return
 
@@ -62,13 +53,15 @@ def main():
     print("        Python Assessment 2 - Address Book v1.0")
     print("               Brendan McCann - J145887")
     print("***************************************************")
-    print("[1] - Print current record count")
-    print("[2] - Print all records")
-    print("[3] - Add a record")
-    print("[4] - Delete a record")
-    print("[5] - Lookup record")
-    print("[6] - Clear all records")
-    print("[H] - Help - Show this menu")
+    print("[1] - Print Current Record Count")
+    print("[2] - Print All Records")
+    print("[3] - Add a Record")
+    print("[4] - Delete a Record")
+    print("[5] - Lookup Record")
+    print("[6] - Clear Records")
+    print("[7] - Save Backup")
+    print("[8] - Load Backup")
+    print("[H] - Help - Show This Menu")
     print("[Q] - Quit")
     
     getCommand()
