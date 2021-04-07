@@ -8,7 +8,7 @@ import shutil
 
 
 fileName = "addrbook.bin"
-backupCreated = bool
+
 
 class Record:
     def __init__(self, name, email, phone, addr):
@@ -24,16 +24,14 @@ class Record:
                "Address: " + self.addr)
 
 
-# Startup command to check if the .bin file exists, if not, an empty dummy file is created.
 def checkExists():
     try:
         with open(fileName, 'rb') as file:
             return True
     except FileNotFoundError:
-        x = open(fileName, 'x')
+        open(fileName, 'x')
 
 
-# Constructs a dictionary of pickled information
 def buildIndex():
     global index
     index = {"Index": [],
@@ -43,7 +41,6 @@ def buildIndex():
              "Phone": [],
              "Address": []}
 
-    # Recount number of records and update register index array.
     recordCount()
 
     with open(fileName, 'rb') as file:
@@ -61,9 +58,9 @@ def buildIndex():
                 break
 
 
-# Creates an array of Records from the index dictionary and parses it for pickling.
 def pickleFromIndex():
     toAdd = []
+    
     with open(fileName, 'wb') as file:
         for x in range(len(index["Index"])):
             name = index["Name"][x]
@@ -76,7 +73,6 @@ def pickleFromIndex():
         addRecords(toAdd)
 
 
-# When iterated through, examines contents of pickle file and adds entry register points to an array.
 def readFile(path):
     global lstIndex
     lstIndex = []
@@ -123,9 +119,6 @@ def createRecord():
     print("\n*** Record Successfully Added! ***")
 
 
-# Checks if item being added is first in an array
-# if so, it is added as 'write' (effectively overwriting any existing pickle file)
-# if it's not, then the additional items are appended.
 def addRecord(rec, isFirst=False):
     if isFirst is True:
         with open(fileName, 'wb') as outList:
@@ -136,7 +129,6 @@ def addRecord(rec, isFirst=False):
     buildIndex()
     
 
-# Handles adding an array of Records
 def addRecords(recList):
     isFirst = True
 
@@ -148,9 +140,9 @@ def addRecords(recList):
             addRecord(rec)
 
 
-# Creates a list of names from the index file in lowercase for comparisons
 def getLowerList():
     lowerList = []
+
     for x in range(len(index["Name"])):
         lowerList.append(index["Name"][x].lower())
     return lowerList
@@ -163,7 +155,7 @@ def delRecord(name, givenIndex=None):
         try:
             x = lowerList.index(name)
         except ValueError:
-            print("*** Name not found! ***\n")
+            print("\n*** Name not found! ***\n")
     else:
         x = givenIndex
 
@@ -174,9 +166,7 @@ def delRecord(name, givenIndex=None):
         del index["Email"][x]
         del index["Phone"][x]
         del index["Address"][x]
-
         return 1
-
     elif lowerList.count(name) > 1 and givenIndex is None:
         foundLocations = [i for i, x in enumerate(lowerList) if x == name]
         print(f"\n*** {len(foundLocations)} occurances of {name.capitalize()} found! ***\n")
@@ -218,6 +208,7 @@ def getRecord(name):
     if name.lower() in lowerList:
         if lowerList.count(name) < 2:
             x = lowerList.index(name)
+
             with open(fileName, 'rb') as file:
                 file.seek(index["Register"][x])
                 y = pickle.load(file)
@@ -227,6 +218,7 @@ def getRecord(name):
         else:
             foundLocations = [i for i, x in enumerate(lowerList) if x == name]
             print(f"\n*** {len(foundLocations)} Occurances of {name.capitalize()} Found! ***\n")
+            
             with open(fileName, 'rb') as file:
                 for x in range(len(foundLocations)):
                     file.seek(index["Register"][foundLocations[x]])
@@ -236,7 +228,6 @@ def getRecord(name):
         print("\n*** No matches found ***")
 
 
-# Wipes data from index and pickled file
 def selfDestruct():
     if recordCount() < 1:
         print("\n*** Records already clear ***")
@@ -265,6 +256,7 @@ def selfDestruct():
 
     if confirm == 'n':
         confirm = ""
+
         while confirm not in valid:
             confirm = input("\nWipe all data anyway? y/n: ").lower()
         if confirm == 'y':
