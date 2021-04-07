@@ -11,7 +11,8 @@ def getCommand():
     validCommands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "H", "HELP", "Q", "QUIT"]
     
     while True:
-        uInput = input("\nPlease specify command: ").upper()
+        print("")
+        uInput = input("Please specify command: ").upper()
         if uInput not in validCommands:
             print("Invalid command, enter H for help")
             getCommand()
@@ -29,15 +30,23 @@ def getCommand():
             elif uInput == "3":
                 ab.createRecord()
             elif uInput == "4":
-                uInput = input("\nPlease enter name to remove: ")
-                result = ab.delRecord(uInput)
+                result = 0
+                if ab.recordCount() > 0:
+                    uInput = input("\nPlease enter name to remove: ")
+                    result = ab.delRecord(uInput)
+                else:
+                    print("\n*** No records found ***")
+                    
                 if result == 1:
                     print("\n*** Record deleted successfully! ***")
                 elif result == 2:
                     print("\n*** Records deleted successfully! ***")
                 ab.pickleFromIndex()
             elif uInput == "5":
-                ab.getRecord(input("\nPlease enter name to lookup: "))
+                if ab.recordCount() > 0:
+                    ab.getRecord(input("\nPlease enter name to lookup: "))
+                else:
+                    print("\n*** No records found ***")
             elif uInput == "6":
                 ab.selfDestruct()
             elif uInput == "7":
