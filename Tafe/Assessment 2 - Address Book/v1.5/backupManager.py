@@ -30,9 +30,9 @@ def loadBackup():
             printListofBackups(backupList)
             uInput = ""
             while not uInput.isnumeric():
-                uInput = input("Please enter number of backup to load: ")
+                uInput = input("\nPlease enter number of backup to load: ")
             while int(uInput) > (len(backupList) - 1) or int(uInput) < 0:
-                uInput = input("Please enter number of backup to load: ")
+                uInput = input("\nPlease enter number of backup to load: ")
 
             backupName = ("./Backups/" + backupList[int(uInput)])
             shutil.copy(backupName, ab.fileName)
@@ -87,10 +87,12 @@ def getListofBackups():
 
 
 def printListofBackups(backupList):
-    print("\nCurrent Backups")
-    for x in range(len(backupList)):
-        print(str(x) + ": " + backupList[x])
-    print("")
+    if os.path.exists("./Backups/") and len(backupList) > 0:
+        print("\nCurrent Backups")
+        for x in range(len(backupList)):
+            print(str(x) + ": " + backupList[x])
+    else:
+        print("\n*** No backups found ***")
 
 def wasTodayBackedUp():
     backupList = getListofBackups()
@@ -104,7 +106,7 @@ def wasTodayBackedUp():
                 
 
 def getCommand():
-    validCommands = ["1", "2", "3", "H", "HELP", "M", "MAIN", "Q", "QUIT"]
+    validCommands = ["1", "2", "3", "4", "H", "HELP", "M", "MAIN", "Q", "QUIT"]
     
     while True:
         print("")
@@ -127,8 +129,11 @@ def getCommand():
                 loadBackup()
                 ab.buildIndex()
                 getCommand()
-            else:
+            elif uInput == '3':
                 deleteBackup()
+                getCommand()
+            else:
+                printListofBackups(getListofBackups())
                 getCommand()
 
         return False
@@ -144,6 +149,7 @@ def menu():
     print("[1] - Save Backup")
     print("[2] - Load Backup")
     print("[3] - Delete Backup")
+    print("[4] - Show Current Backups")
     print("[H] - Help - Show This Menu")
     print("[M] - Return to Main Menu")
     print("[Q] - Quit Program")
