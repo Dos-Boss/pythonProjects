@@ -9,7 +9,7 @@ import os
 
         
 def getCommand():
-    validCommands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "H", "HELP", "Q", "QUIT"]
+    validCommands = ["1", "2", "3", "4", "5", "6", "7", "8", "H", "HELP", "Q", "QUIT"]
     
     while True:
         print("")
