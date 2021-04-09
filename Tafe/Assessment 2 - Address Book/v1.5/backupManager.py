@@ -3,18 +3,17 @@
 # Brendan McCann - J145887
 # 09/04/2021
 
-
-import addressbook as ab
 import os
-from datetime import datetime
 import shutil
+from datetime import datetime
+import addressbook as ab
 
 
 def saveBackup():
     backupName = ("./Backups/" + datetime.now().strftime("%b-%d-%Y-%H-%M-%S") + ".bak")
 
     if ab.recordCount() < 1:
-        print("\n*** No data to save ***")
+        print("\n*** No Data to Save ***")
     else:
         if not os.path.exists("./Backups/"):
             os.makedirs(os.path.dirname(backupName), exist_ok=True)
@@ -28,21 +27,21 @@ def loadBackup():
     if len(backupList) > 0 and os.path.exists("./Backups/"):
         if len(backupList) > 1:
             printListofBackups(backupList)
-            uInput = ""
-            while not uInput.isnumeric():
+            while True:
                 uInput = input("\nPlease enter number of backup to load: ")
-            while int(uInput) > (len(backupList) - 1) or int(uInput) < 0:
-                uInput = input("\nPlease enter number of backup to load: ")
+                try:
+                    backupName = ("./Backups/" + backupList[int(uInput)])
+                    shutil.copy(backupName, ab.fileName)
+                    print(f"\n{backupList[int(uInput)]} loaded!")
+                except ValueError:
+                    uInput = ""
+                except IndexError:
+                    uInput = ""
+                else:
+                    break
 
-            backupName = ("./Backups/" + backupList[int(uInput)])
-            shutil.copy(backupName, ab.fileName)
-            print(f"\n{backupList[int(uInput)]} loaded!")
-        else:
-            backupName = ("./Backups/" + backupList[0])
-            shutil.copy(backupName, ab.fileName)
-            print(f"\n{backupList[0]} loaded")
     else:
-        print("\n*** No backups found ***")
+        print("\n*** No Backups to Load ***")
 
 
 def deleteBackup():
@@ -75,7 +74,7 @@ def deleteBackup():
             return
 
     else:
-        print("\n*** No backups to delete ***")
+        print("\n*** No Backups to Delete ***")
           
 
 def getListofBackups():
@@ -92,7 +91,7 @@ def printListofBackups(backupList):
         for x in range(len(backupList)):
             print(str(x) + ": " + backupList[x])
     else:
-        print("\n*** No backups found ***")
+        print("\n*** No Backups Found ***")
 
 def wasTodayBackedUp():
     backupList = getListofBackups()
