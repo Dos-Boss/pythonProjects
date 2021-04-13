@@ -89,7 +89,7 @@ def readFile(path):
         except EOFError:
             pass
 
-# Iterates over readFile, building lstIndex and returning a count of data entries.
+# Iterates over readFile, building lstIndex and returns a count of data entries.
 def recordCount():
     count = 0
 
@@ -124,8 +124,8 @@ def createRecord():
     print("\n*** Record Successfully Added! ***")
 
 
-# Checks to see if it's appending a single record,
-# or clearing the pickle file. Used to handle backup loading.
+# Checks to see if it's appending a single record or clearing the pickle file.
+# Used to handle building pickleFromIndex().
 def addRecord(rec, isFirst=False):
     if isFirst is True:
         with open(fileName, 'wb') as outList:
