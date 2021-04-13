@@ -24,8 +24,8 @@ def genList():
 
 # Returns a sorted clone of a given list.
 def getSortedList(lst):
-
     lstSortedTemps = copy.deepcopy(lst)
+    
     for day in range(len(lstSortedTemps)):
         lstSortedTemps[day].sort()
     return lstSortedTemps
@@ -127,9 +127,13 @@ def getCommand():
                 if dayToSearch.isnumeric():
                     print(binarySearch(getSortedList(lstTemps)[int(dayToSearch) - 1], dayToSearch, tempToSearch))
                 else:
+                    found = False
                     for day in range(days):
                         if "found!" in binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch):
                             print(binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch))
+                            found = True
+                    if not found:
+                        print(f"\nTemperature of {tempToSearch} degrees did not occur")
 
 
 # Displays menu and calls program loop.
