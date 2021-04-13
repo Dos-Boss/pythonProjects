@@ -11,10 +11,6 @@ days = 31
 
 lstTemps = []
 
-found = {"day": [],
-         "temp": [],
-         "index": []}
-
 # Generate list of random temps.
 def genList():
     lstTemps.clear()
