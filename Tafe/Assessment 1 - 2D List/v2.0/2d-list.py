@@ -11,6 +11,7 @@ days = 31
 
 lstTemps = []
 
+
 # Generate list of random temps.
 def genList():
     lstTemps.clear()
@@ -74,6 +75,7 @@ def binarySearch(lst, day, temp):
             return (f"\nDay {day}:\nTemperature of {temp} degrees found!, occured on hour {mid + 1}.")
     return (f"\nDay {day}:\nTemperature of {temp} degrees did not occur")
 
+
 # Validates user input for Binary Search temp.
 def validateBSTemp(temp):
     try:
@@ -81,6 +83,7 @@ def validateBSTemp(temp):
     except ValueError:
         temp = validateBSTemp(input("Please enter temperature to search for: "))
     return round(float(temp), 1)
+
 
 # Validates user input for Binary Search day.
 def validateBSDay(day):
@@ -94,6 +97,7 @@ def validateBSDay(day):
         return day
     else:
         return validateBSDay(input("Please enter a day to search (1-31) or (A)ll: ").upper())
+
 
 # Main loop to interpret user's command.
 def getCommand():
