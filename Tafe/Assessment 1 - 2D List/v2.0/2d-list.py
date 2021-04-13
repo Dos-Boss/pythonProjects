@@ -4,11 +4,16 @@
 
 import random
 import copy
+import os
 
 hours = 24
 days = 31
 
 lstTemps = []
+
+found = {"day": [],
+         "temp": [],
+         "index": []}
 
 # Generate list of random temps.
 def genList():
@@ -57,6 +62,7 @@ def printLowHigh(lst):
 # Depending on the above result, the boundary is then cut in half,
 # getting rid of the redundant data. This process repeats until our
 # desired value is located or deemed to be absent from the array
+# desired value is located or deemed to be absent from the array
 def binarySearch(lst, day, temp):
     start = 0
     mid = 0
@@ -70,12 +76,8 @@ def binarySearch(lst, day, temp):
         elif lst[mid] > temp:
             end = mid - 1
         else:
-            print(f"\nDay {day}:")
-            print("Temperature of {0} degrees found!, occured on hour {1}.".format(temp, mid + 1))
-            return
-    print(f"\nDay {day}:")
-    print("Temperature of {0} degrees did not occur.".format(temp))
-    return
+            return (f"\nDay {day}:\nTemperature of {temp} degrees found!, occured on hour {mid + 1}.")
+    return (f"\nDay {day}:\nTemperature of {temp} degrees did not occur")
 
 # Validates user input for Binary Search temp.
 def validateBSTemp(temp):
@@ -125,13 +127,17 @@ def getCommand():
                 dayToSearch = validateBSDay(input("\nPlease enter a day to search (1-31) or (A)ll: ").upper())
 
                 if dayToSearch.isnumeric():
-                    binarySearch(getSortedList(lstTemps)[int(dayToSearch) - 1], dayToSearch, tempToSearch)
+                    print(binarySearch(getSortedList(lstTemps)[int(dayToSearch) - 1], dayToSearch, tempToSearch))
+                
                 else:
                     for day in range(days):
-                        binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch)
+                        if "found!" in binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch):
+                            print(binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch))
+
 
 # Displays menu and calls program loop.
 def main():
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("***************************************************")
     print("        Python Assessment 1 - 2D List v2.0")
     print("              Brendan McCann - J145887")
