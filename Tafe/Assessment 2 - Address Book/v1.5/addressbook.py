@@ -125,7 +125,7 @@ def createRecord():
 
 
 # Checks to see if it's appending a single record or clearing the pickle file.
-# Used to handle building pickleFromIndex().
+# Used to handle pickleFromIndex().
 def addRecord(rec, isFirst=False):
     if isFirst is True:
         with open(fileName, 'wb') as outList:
