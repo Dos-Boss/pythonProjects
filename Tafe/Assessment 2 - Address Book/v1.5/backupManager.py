@@ -30,8 +30,7 @@ def loadBackup():
             while True:
                 uInput = input("\nPlease enter number of backup to load: ")
                 try:
-                    backupName = ("./Backups/" + backupList[int(uInput)])
-                    shutil.copy(backupName, ab.fileName)
+                    shutil.copy("./Backups/" + backupList[int(uInput)], ab.fileName)
                     print(f"\n{backupList[int(uInput)]} loaded!")
                 except ValueError:
                     uInput = ""
@@ -39,7 +38,9 @@ def loadBackup():
                     uInput = ""
                 else:
                     break
-
+        else:
+            shutil.copy("./Backups/" + backupList[0], ab.fileName)
+            print(f"\n{backupList[0]} loaded!")
     else:
         print("\n*** No Backups to Load ***")
 
@@ -66,7 +67,7 @@ def deleteBackup():
             return
         elif uInput in valid[2:5]:
             shutil.rmtree("./Backups/")
-            print("\nAll backups deleted")
+            print("\n*** All Backups Deleted")
         else:
             toDelete = ("./Backups/" + backupList[int(uInput)])
             os.remove(toDelete)
