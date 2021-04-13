@@ -67,7 +67,7 @@ def deleteBackup():
             return
         elif uInput in valid[2:5]:
             shutil.rmtree("./Backups/")
-            print("\n*** All Backups Deleted")
+            print("\n*** All Backups Deleted ***")
         else:
             toDelete = ("./Backups/" + backupList[int(uInput)])
             os.remove(toDelete)
