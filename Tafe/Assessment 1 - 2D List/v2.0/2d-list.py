@@ -62,7 +62,6 @@ def printLowHigh(lst):
 # Depending on the above result, the boundary is then cut in half,
 # getting rid of the redundant data. This process repeats until our
 # desired value is located or deemed to be absent from the array
-# desired value is located or deemed to be absent from the array
 def binarySearch(lst, day, temp):
     start = 0
     mid = 0
