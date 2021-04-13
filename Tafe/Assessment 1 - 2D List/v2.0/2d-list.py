@@ -6,15 +6,15 @@ import random
 import copy
 import os
 
-hours = 24
 days = 31
-
+hours = 24
 lstTemps = []
 
 
 # Generate list of random temps.
 def genList():
     lstTemps.clear()
+
     for day in range(days):
         buildList = []
         for hour in range(hours):
@@ -24,8 +24,8 @@ def genList():
 
 # Returns a sorted clone of a given list.
 def getSortedList(lst):
+
     lstSortedTemps = copy.deepcopy(lst)
-    
     for day in range(len(lstSortedTemps)):
         lstSortedTemps[day].sort()
     return lstSortedTemps
@@ -34,6 +34,7 @@ def getSortedList(lst):
 # Get average afternoon (12th hour) temp.
 def avgNoonTemp(lst):
     tempSum = 0
+
     for day in range(len(lst)):
         tempSum += lst[day][11]
     avgTemp = tempSum / days
@@ -87,7 +88,6 @@ def validateBSTemp(temp):
 
 # Validates user input for Binary Search day.
 def validateBSDay(day):
-
     if day.isnumeric():
         if int(day) > 0 and int(day) < 32:
             return day
@@ -101,7 +101,6 @@ def validateBSDay(day):
 
 # Main loop to interpret user's command.
 def getCommand():
-    
     validCommands = ["0", "1", "2", "3", "H", "HELP", "Q", "QUIT"]
 
     while True:
@@ -127,7 +126,6 @@ def getCommand():
 
                 if dayToSearch.isnumeric():
                     print(binarySearch(getSortedList(lstTemps)[int(dayToSearch) - 1], dayToSearch, tempToSearch))
-                
                 else:
                     for day in range(days):
                         if "found!" in binarySearch(getSortedList(lstTemps)[day], day + 1, tempToSearch):
