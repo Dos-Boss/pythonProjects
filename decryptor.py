@@ -7,8 +7,8 @@
 # import os
 # import sys
 import argparse
-from Cryptodome.PublicKey import RSA
-from Cryptodome.Cipher import DES3, PKCS1_OAEP
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import DES3, PKCS1_OAEP
 # from Cryptodome import Random
 
 
@@ -34,7 +34,7 @@ def get_args():
 file_in = open("ZeroC00l.zzz.cry", "rb")
 
 usr_keys = get_args()
-priv_key = RSA.import_key(open(usr_keys.priv_key, 'rb').read())
+priv_key = RSA.importKey(open(usr_keys.priv_key, 'rb').read())
 print("\nPrivatekey Initialised!")
 
 cipher_rsa = PKCS1_OAEP.new(priv_key)
