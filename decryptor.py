@@ -40,8 +40,8 @@ session_key = cipher_rsa.decrypt(sec_key)
 
 file_in = open("ZeroC00l.zzz.cry", "rb")
 
-cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv = Random.get_random_byts(8)))
-data = cipher_des3.decrypt_and_verify(file_in, tag)
+cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv=Random.get_random_bytes(8))
+data = cipher_des3.decrypt_and_verify(file_in)
 print(data.decode("utf-8"))
 
 
