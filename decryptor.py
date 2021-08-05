@@ -14,8 +14,8 @@ from Crypto.Cipher import DES3, PKCS1_OAEP
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--priv-key", dest="priv_key", help="Private Key")
-    parser.add_argument("-s", "--secret-key", dest="sec_key", help="Secret Key")
+    parser.add_argument("-p", "--privatekey", dest="priv_key", help="Private Key")
+    parser.add_argument("-s", "--secretkey", dest="sec_key", help="Secret Key")
     usr_keys = parser.parse_args()
     if not usr_keys.priv_key:
         print("No privatekey specified!")
