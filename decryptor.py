@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-# WIP
 # Brendan McCann
 # 05/08/2021
 # Python Ransomware Decryptor (DES3)
@@ -10,6 +9,7 @@ import sys
 import argparse
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
+from Crypto import Random
 
 
 def get_args():
@@ -38,9 +38,12 @@ sec_key = usr_keys.sec_key
 cipher_rsa = PKCS1_OAEP.new(priv_key)
 session_key = cipher_rsa.decrypt(sec_key)
 
+file_in = open("ZeroC00l.zzz.cry", "rb")
 
-def decrypt_file():
-    return
+cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv = Random.get_random_byts(8)))
+data = cipher_des3.decrypt_and_verify(file_in, tag)
+print(data.decode("utf-8"))
+
 
 
 
