@@ -17,15 +17,10 @@ def get_args():
     parser.add_argument("-p", "--priv-key", dest="priv_key", help="Private Key")
     parser.add_argument("-s", "--secret-key", dest="sec_key", help="Secret Key")
     usr_keys = parser.parse_args()
-    if usr_keys.priv_key:
-        print("Privatekey specified")
-    else:
+    if not usr_keys.priv_key:
         print("No privatekey specified!")
         exit()
-
-    if usr_keys.sec_key:
-        print("Secretkey specified")
-    else:
+    elif not usr_keys.sec_key:
         print("No secretkey specified!")
         exit()
     return usr_keys
