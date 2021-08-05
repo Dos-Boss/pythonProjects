@@ -32,8 +32,8 @@ def get_args():
 
 
 usr_keys = get_args()
-priv_key = usr_keys.priv_key
-sec_key = usr_keys.sec_key
+priv_key = RSA.import_key(open(usr_keys.priv_key).read())
+sec_key = RSA.import_key(open(usr_keys.sec_key).read())
 
 cipher_rsa = PKCS1_OAEP.new(priv_key)
 session_key = cipher_rsa.decrypt(sec_key)
