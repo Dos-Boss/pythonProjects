@@ -2,14 +2,14 @@
 
 # Brendan McCann
 # 05/08/2021
-# Python Ransomware Decryptor (DES3)
+# Python DES3 Decryptor
 
-import os
-import sys
+# import os
+# import sys
 import argparse
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import DES3, PKCS1_OAEP
-from Crypto import Random
+from Cryptodome.PublicKey import RSA
+from Cryptodome.Cipher import DES3, PKCS1_OAEP
+# from Cryptodome import Random
 
 
 def get_args():
@@ -18,36 +18,31 @@ def get_args():
     parser.add_argument("-s", "--secret-key", dest="sec_key", help="Secret Key")
     usr_keys = parser.parse_args()
     if usr_keys.priv_key:
-        print("Privatekey initialised")
+        print("Privatekey specified")
     else:
-        print("No privatekey loaded!")
+        print("No privatekey specified!")
         exit()
 
     if usr_keys.sec_key:
-        print("Secret Key Initialised")
+        print("Secretkey specified")
     else:
-        print("No secretkey loaded!")
+        print("No secretkey specified!")
         exit()
     return usr_keys
 
 
-usr_keys = get_args()
-priv_key = RSA.import_key(open(usr_keys.priv_key).read())
-sec_key = RSA.import_key(open(usr_keys.sec_key).read())
-
-cipher_rsa = PKCS1_OAEP.new(priv_key)
-session_key = cipher_rsa.decrypt(sec_key)
-
 file_in = open("ZeroC00l.zzz.cry", "rb")
 
-cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv=Random.get_random_bytes(8))
-data = cipher_des3.decrypt_and_verify(file_in)
+usr_keys = get_args()
+priv_key = RSA.import_key(open(usr_keys.priv_key, 'rb').read())
+print("\nPrivatekey Initialised!")
+
+cipher_rsa = PKCS1_OAEP.new(priv_key)
+sec_key = open(usr_keys.sec_key, 'rb').read()
+print("Secretkey Initialised!\n")
+
+session_key = cipher_rsa.decrypt(sec_key).decode()
+iv = file_in.read(8)
+cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv)
+data = cipher_des3.decrypt(file_in.read())
 print(data.decode("utf-8"))
-
-
-
-
-
-
-
-
