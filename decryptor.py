@@ -59,6 +59,6 @@ os.chdir(home)
 for root, dirs, files in os.walk(home):
     for file in files:
         if file.endswith(".cry"):
-            fname = os.path.join(root, file)
+            fname = os.path.abspath(os.path.join(root, file))
             write_file(fname, decryptor(fname))
             print(fname + " - Decrypted Successfully")
