@@ -12,7 +12,6 @@ from Crypto.Cipher import DES3, PKCS1_OAEP
 from Crypto import Random
 
 home = os.environ['USERPROFILE']
-# home = "D:"
 
 def get_args():
     parser = argparse.ArgumentParser()
