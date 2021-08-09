@@ -12,7 +12,7 @@ from Crypto.Cipher import DES3, PKCS1_OAEP
 from Crypto import Random
 
 home = os.environ['USERPROFILE']
-home = "D:"
+# home = "D:"
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -59,6 +59,6 @@ os.chdir(home)
 for root, dirs, files in os.walk(home):
     for file in files:
         if file.endswith(".cry"):
-            fname = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
+            fname = os.path.join(root, file)
             write_file(fname, decryptor(fname))
             print(fname + " - Decrypted Successfully")
