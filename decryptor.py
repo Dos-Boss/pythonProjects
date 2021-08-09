@@ -5,11 +5,14 @@
 # Python DES3 Decryptor
 
 import os
+# import sys
 import argparse
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
+from Crypto import Random
 
 home = os.environ['USERPROFILE']
+home = "D:"
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -41,9 +44,15 @@ def decryptor(in_file):
     return data.decode()
 
 def write_file(file, data):
-    ofile = open(file[:-4], 'x')
-    ofile.write(data)
-    ofile.close()
+    try:
+        ofile = open(file[:-4], 'x')
+    except FileExistsError:
+        ofile = open(file[:-4], 'w')
+        ofile.write(data)
+        ofile.close()
+    else:
+        ofile.write(data)
+        ofile.close()
     return
 
 os.chdir(home)
