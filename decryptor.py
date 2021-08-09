@@ -38,10 +38,8 @@ def decryptor(in_file):
     ifile = open(in_file, 'rb')
     iv = ifile.read(8)
     cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv)
-
     data = cipher_des3.decrypt(ifile.read())
-
-    print(data.decode())
+    # print(data.decode())
     return data.decode()
 
 def write_file(file, data):
