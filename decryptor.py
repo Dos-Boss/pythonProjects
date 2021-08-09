@@ -44,15 +44,9 @@ def decryptor(in_file):
     return data.decode()
 
 def write_file(file, data):
-    try:
-        ofile = open(file[:-4], 'x')
-    except FileExistsError:
-        ofile = open(file[:-4], 'w')
-        ofile.write(data)
-        ofile.close()
-    else:
-        ofile.write(data)
-        ofile.close()
+    ofile = open(file[:-4], 'w')
+    ofile.write(data)
+    ofile.close()
     return
 
 os.chdir(home)
