@@ -11,10 +11,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
 from Crypto import Random
 
-
 home = os.environ['USERPROFILE']
-# home = "C:"
-
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -58,5 +55,5 @@ for root, dirs, files in os.walk(home):
     for file in files:
         if file.endswith(".cry"):
             fname = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
-            write_file(fname,decryptor(fname))
+            write_file(fname, decryptor(fname))
             print(fname + " - Decrypted Successfully")
