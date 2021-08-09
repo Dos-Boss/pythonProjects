@@ -5,11 +5,9 @@
 # Python DES3 Decryptor
 
 import os
-# import sys
 import argparse
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
-from Crypto import Random
 
 home = os.environ['USERPROFILE']
 
