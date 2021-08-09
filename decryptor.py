@@ -4,12 +4,16 @@
 # 05/08/2021
 # Python DES3 Decryptor
 
-# import os
+import os
 # import sys
 import argparse
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
+from Crypto import Random
 
+
+home = os.environ['USERPROFILE']
+# home = "C:"
 
 
 def get_args():
@@ -25,19 +29,34 @@ def get_args():
         exit()
     return usr_keys
 
-
-file_in = open("ZeroC00l.zzz.cry", "rb")
-
 usr_keys = get_args()
 priv_key = RSA.importKey(open(usr_keys.priv_key, 'rb').read())
-print("\nPrivatekey Initialised!")
-
 cipher_rsa = PKCS1_OAEP.new(priv_key)
-sec_key = open(usr_keys.sec_key, 'rb').read()
-print("Secretkey Initialised!\n")
 
+sec_key = open(usr_keys.sec_key, 'rb').read()
 session_key = cipher_rsa.decrypt(sec_key).decode()
-iv = file_in.read(8)
-cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv)
-data = cipher_des3.decrypt(file_in.read())
-print(data.decode("utf-8"))
+print("Keys Initialised...Get Psyched!\n")
+
+def decryptor(in_file):
+    ifile = open(in_file, 'rb')
+    iv = ifile.read(8)
+    cipher_des3 = DES3.new(session_key, DES3.MODE_CFB, iv)
+
+    data = cipher_des3.decrypt(ifile.read())
+
+    print(data.decode())
+    return data.decode()
+
+def write_file(file, data):
+    ofile = open(file[:-4], 'x')
+    ofile.write(data)
+    ofile.close()
+    return
+
+os.chdir(home)
+for root, dirs, files in os.walk(home):
+    for file in files:
+        if file.endswith(".cry"):
+            fname = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
+            write_file(fname,decryptor(fname))
+            print(fname + " - Decrypted Successfully")
