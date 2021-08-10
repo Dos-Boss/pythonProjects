@@ -2,14 +2,12 @@
 
 # Brendan McCann
 # 05/08/2021
-# Python Triple DES Decryptor
+# Python Triple DES Decryptor for Windows
 
 import os
 import argparse
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
-
-home = os.environ['USERPROFILE']
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -32,6 +30,10 @@ def init():
     global session_key
     session_key = cipher_rsa.decrypt(sec_key).decode()
     print("Keys Initialised...Get Psyched!\n")
+    available_drives = [chr(x) for x in range(65, 91) if os.path.exists(chr(x) + ":")]
+    print(available_drives)
+    global home
+    home = input("Please Enter Drive Letter to Scan: ").upper() + ":/"
 
 def decryptor(in_file):
     ifile = open(in_file, 'rb')
