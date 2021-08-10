@@ -41,17 +41,17 @@ def drive_to_scan():
     global drive
     drive = []
 
-    get_drives = [chr(x) for x in range(65, 91) if os.path.exists(chr(x) + ":")]
-    get_drives.append("All")
+    drive_list = [chr(x) for x in range(65, 91) if os.path.exists(chr(x) + ":")]
+    drive_list.append("All")
 
     uinput = ""
-    while uinput not in get_drives:
-        print("\n", get_drives)
+    while uinput not in drive_list:
+        print("\n", drive_list)
         uinput = input("Please Enter Drive Letter to Scan: ").capitalize()
     if uinput != "All":
         drive.append(uinput)
     else:
-        drive = get_drives[:-1]
+        drive = drive_list[:-1]
     return
     
 def decryptor(in_file):
