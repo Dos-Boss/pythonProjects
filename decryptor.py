@@ -80,8 +80,7 @@ def main():
                         write_file(fname, decryptor(fname))
                         print(fname + " - Decrypted Successfully")
                     except UnicodeDecodeError:
-                        print(fname + " - Could Not Be Decrypted! - Bad Keys")
-                    
+                        print(fname + " - Could Not Be Decrypted! - Bad Keys")                
     print("Decryption Complete")
             
 main()
