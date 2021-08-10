@@ -37,6 +37,7 @@ def init():
     return
 
 def drive_to_scan():
+    # TODO: Rewrite this function to be cross platform
     global drive
     drive = []
 
