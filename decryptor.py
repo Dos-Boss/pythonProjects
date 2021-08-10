@@ -27,7 +27,6 @@ def get_args():
 usr_keys = get_args()
 priv_key = RSA.importKey(open(usr_keys.priv_key, 'rb').read())
 cipher_rsa = PKCS1_OAEP.new(priv_key)
-
 sec_key = open(usr_keys.sec_key, 'rb').read()
 session_key = cipher_rsa.decrypt(sec_key).decode()
 print("Keys Initialised...Get Psyched!\n")
