@@ -24,12 +24,14 @@ def get_args():
         exit()
     return usr_keys
 
-usr_keys = get_args()
-priv_key = RSA.importKey(open(usr_keys.priv_key, 'rb').read())
-cipher_rsa = PKCS1_OAEP.new(priv_key)
-sec_key = open(usr_keys.sec_key, 'rb').read()
-session_key = cipher_rsa.decrypt(sec_key).decode()
-print("Keys Initialised...Get Psyched!\n")
+def init():
+    usr_keys = get_args()
+    priv_key = RSA.importKey(open(usr_keys.priv_key, 'rb').read())
+    cipher_rsa = PKCS1_OAEP.new(priv_key)
+    sec_key = open(usr_keys.sec_key, 'rb').read()
+    global session_key
+    session_key = cipher_rsa.decrypt(sec_key).decode()
+    print("Keys Initialised...Get Psyched!\n")
 
 def decryptor(in_file):
     ifile = open(in_file, 'rb')
@@ -45,10 +47,14 @@ def write_file(file, data):
     ofile.close()
     return
 
-os.chdir(home)
-for root, dirs, files in os.walk(home):
-    for file in files:
-        if file.endswith(".cry"):
-            fname = os.path.abspath(os.path.join(root, file))
-            write_file(fname, decryptor(fname))
-            print(fname + " - Decrypted Successfully")
+def main():
+    init()
+    os.chdir(home)
+    for root, dirs, files in os.walk(home):
+        for file in files:
+            if file.endswith(".cry"):
+                fname = os.path.abspath(os.path.join(root, file))
+                write_file(fname, decryptor(fname))
+                print(fname + " - Decrypted Successfully")
+            
+main()
