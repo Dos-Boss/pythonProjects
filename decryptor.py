@@ -2,7 +2,7 @@
 
 # Brendan McCann
 # 05/08/2021
-# Python DES3 Decryptor
+# Python Triple DES Decryptor
 
 import os
 import argparse
