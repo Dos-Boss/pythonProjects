@@ -14,7 +14,7 @@ def get_args():
     parser.add_argument("-p", "--privatekey", dest="priv_key", help="Private Key")
     parser.add_argument("-s", "--secretkey", dest="sec_key", help="Secret Key")
     usr_keys = parser.parse_args()
-    
+
     if not usr_keys.priv_key:
         print("No privatekey specified!")
         exit()
@@ -32,7 +32,7 @@ def init():
 
     secret_key = open(usr_keys.sec_key, 'rb').read()
     session_key = cipher_rsa.decrypt(secret_key).decode()
-    print("Keys Initialised...Get Psyched!\n")
+    print("Keys Initialised...Get Psyched!")
     drive_to_scan()
     return
 
@@ -45,7 +45,7 @@ def drive_to_scan():
 
     uinput = ""
     while uinput not in get_drives:
-        print(get_drives)
+        print("\n", get_drives)
         uinput = input("Please Enter Drive Letter to Scan: ").capitalize()
     if uinput != "All":
         drive.append(uinput)
