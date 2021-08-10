@@ -76,8 +76,12 @@ def main():
             for file in files:
                 if file.endswith(".cry"):
                     fname = os.path.abspath(os.path.join(root, file))
-                    write_file(fname, decryptor(fname))
-                    print(fname + " - Decrypted Successfully")
+                    try:
+                        write_file(fname, decryptor(fname))
+                        print(fname + " - Decrypted Successfully")
+                    except UnicodeDecodeError:
+                        print(fname + " - Could Not Be Decrypted! - Bad Keys")
+                    
     print("Decryption Complete")
             
 main()
