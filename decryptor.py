@@ -2,12 +2,13 @@
 
 # Brendan McCann
 # 05/08/2021
-# Python Triple DES Decryptor for Windows
+# Python Triple DES Decryptor
 
 import os
 import argparse
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
+
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -23,6 +24,7 @@ def get_args():
         exit()
     return usr_keys
 
+
 def init():
     global session_key
 
@@ -31,12 +33,14 @@ def init():
     cipher_rsa = PKCS1_OAEP.new(private_key)
 
     secret_key = open(usr_keys.sec_key, 'rb').read()
-    session_key = cipher_rsa.decrypt(secret_key).decode()
+    session_key = cipher_rsa.decrypt(secret_key).decode('utf-8')
+    print("_______________________________")
     print("Keys Initialised...Get Psyched!")
-    drive_to_scan()
+    drive_to_scan_linux()
     return
 
-def drive_to_scan():
+
+def drive_to_scan_windows():
     # TODO: Rewrite this function to be cross platform
     global drive
     drive = []
@@ -53,7 +57,15 @@ def drive_to_scan():
     else:
         drive = drive_list[:-1]
     return
-    
+
+
+def drive_to_scan_linux():
+    global drive
+    drive = []
+    drive.append("/")
+    return
+
+
 def decryptor(in_file):
     ifile = open(in_file, 'rb')
     iv = ifile.read(8)
@@ -61,18 +73,20 @@ def decryptor(in_file):
     data = cipher_des3.decrypt(ifile.read())
     return data.decode()
 
+
 def write_file(file, data):
     ofile = open(file[:-4], 'w')
     ofile.write(data)
     ofile.close()
     return
 
+
 def main():
     init()
     print("\nPlease Wait...")
     for x in range(len(drive)):
-        os.chdir(drive[x] + ":/")
-        for root, dirs, files in os.walk(drive[x] + ":/"):
+        os.chdir(drive[x])
+        for root, dirs, files in os.walk(drive[x]):
             for file in files:
                 if file.endswith(".cry"):
                     fname = os.path.abspath(os.path.join(root, file))
@@ -80,7 +94,8 @@ def main():
                         write_file(fname, decryptor(fname))
                         print(fname + " - Decrypted Successfully")
                     except UnicodeDecodeError:
-                        print(fname + " - Could Not Be Decrypted! - Bad Keys")                
-    print("Decryption Complete")
-            
+                        print(fname + " - Could Not Be Decrypted! - Bad Keys")
+    print("\nDecryption Complete\n")
+
+
 main()
