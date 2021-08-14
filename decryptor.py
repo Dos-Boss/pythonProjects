@@ -49,11 +49,12 @@ def drive_to_scan_win():
     drive = []
 
     drive_list = [chr(x) for x in range(65, 91) if os.path.exists(chr(x) + ":")]
-    drive_list.append("All")
 
     drive_adj = drive_list.copy()
     for x in range(len(drive_adj)):
         drive_adj[x] += ":/"
+
+    drive_list.append("All")
 
     uinput = ""
     while uinput not in drive_list:
