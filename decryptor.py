@@ -54,7 +54,7 @@ def drive_to_scan_win():
     drive_adj = drive_list.copy()
     for x in range(len(drive_adj)):
         drive_adj[x] += ":/"
-    
+
     uinput = ""
     while uinput not in drive_list:
         print("\n", drive_list)
