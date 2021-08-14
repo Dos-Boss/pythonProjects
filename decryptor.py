@@ -6,6 +6,7 @@
 
 import os
 import argparse
+import platform
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
 
@@ -36,30 +37,37 @@ def init():
     session_key = cipher_rsa.decrypt(secret_key).decode('utf-8')
     print("_______________________________")
     print("Keys Initialised...Get Psyched!")
-    drive_to_scan_linux()
+    if platform.system() == "Windows":
+        drive_to_scan_win()
+    else:
+        drive_to_scan_nix()
     return
 
 
-def drive_to_scan_windows():
-    # TODO: Rewrite this function to be cross platform
+def drive_to_scan_win():
     global drive
     drive = []
 
     drive_list = [chr(x) for x in range(65, 91) if os.path.exists(chr(x) + ":")]
     drive_list.append("All")
 
+    drive_adj = drive_list.copy()
+    for x in range(len(drive_adj)):
+        drive_adj[x] += ":/"
+    
     uinput = ""
     while uinput not in drive_list:
         print("\n", drive_list)
         uinput = input("Please Enter Drive Letter to Scan: ").capitalize()
     if uinput != "All":
-        drive.append(uinput)
+        drive.append(uinput + ":/")
     else:
-        drive = drive_list[:-1]
+        drive = drive_adj
     return
 
 
-def drive_to_scan_linux():
+def drive_to_scan_nix():
+    # TODO: List mount points instead of defaulting to root scan.
     global drive
     drive = []
     drive.append("/")
