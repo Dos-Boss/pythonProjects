@@ -2,4 +2,6 @@
 Just a place to code-dump.
 
 # xirTsyS
-Let's talk
+whoami
+whatami
+whereami
